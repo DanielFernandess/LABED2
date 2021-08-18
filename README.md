@@ -3,6 +3,6 @@
 
 Participante:
 
-Anderson Paiva
-Carlos Daniel
-Weslei De Nascimento
+Anderson Paiva;
+Carlos Daniel;
+Weslei De Nascimento.
