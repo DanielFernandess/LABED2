@@ -5,4 +5,4 @@ Participantes:
 
 Anderson Paiva;
 Carlos Daniel;
-Weslei De Nascimento.
+Wesley De Nascimento.
