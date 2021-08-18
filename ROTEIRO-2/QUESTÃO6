@@ -1,0 +1,34 @@
+#include <stdio.h>
+
+void vnormal(int tamanho, int n, int *v);
+void vinverso(int n, int *v);
+
+int main(void) {
+  int n;
+  printf("informe a quantidade do vetor\n");
+  scanf ("%d", &n);
+  int v[n];
+  int i;
+  for (i = 0; i < n; i++){
+    printf("Informe o valor da posicao %d: \n", i+1);
+    scanf("%d", &v[i]);
+  }
+  printf("Vetor normal: \n");
+  vnormal(n, 0, v);
+  printf("Vetor inverso: \n");
+  vinverso(n-1, v);
+  return 0;
+}
+
+void vnormal(int tamanho, int n, int *v){
+  printf("v[%d] = %d\n", n, v[n]);
+    if(n<tamanho-1){
+      vnormal(tamanho, n+1, v);
+    }
+}
+void vinverso(int n, int *v){
+  printf("v[%d] = %d\n", n, v[n]);
+    if(n>0){
+      vinverso(n-1, v);
+    }
+}
