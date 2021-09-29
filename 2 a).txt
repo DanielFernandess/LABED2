@@ -17,7 +17,7 @@ void inicilzarLista(Lista *l){ // para inicializa a lisata encadeada
 	l->inicio = NULL;
 	l->tam = 0;
 }
-int funcaoDiv(int chave) // funÃ§ao divisao
+int funcaoDiv(int chave) // funçao divisao
 {
 	return chave % TAM;
 }
