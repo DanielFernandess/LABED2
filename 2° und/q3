@@ -1,67 +1,67 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define TAM 7 
-#define TAMM 7
-#define TAMD 7
+#define M 25
+#define MM 25
+#define MD 25
 
-void inicializarDiv(int t[])
+void inicializarDiv(int c[])
 {
 	int i;
-	for(i = 0; i < TAM; i++)
+	for(i = 0; i < M; i++)
 	{
-		t[i] = 0;
+		c[i] = 0;
 	}
 }
-void inicializarTabelamMult(int tm[])
+void inicializarTabelamMult(int x[])
 {
 	int j;
-	for(j = 0; j < TAMM; j++)
+	for(j = 0; j < MM; j++)
 	{
-		tm[j] = 0;
+		x[j] = 0;
 	}
 }
 void inicializarTabelaDobra(int td[])
 {
 	int z;
-	for(z = 0; z < TAMD; z++)
+	for(z = 0; z < MD; z++)
 	{
 		td[z] = 0;
 	}
 }
-int funcaodiv(int chave)
+int funcaodiv(int cod)
 {
-	return chave % TAM;
+	return cod % M;
 }
-int funcaoMult(int chave1){
+int funcaoMult(int cods){
 	float a = 0.6180339887;
-	float value = chave1 * a;
+	float value = cods * a;
 	value = value - (int) value;
-	return (int) (TAMM * value);
+	return (int) (MM * value);
 }
-int funcaoDobra(int chave2){
-	int num_bits = chave2;
-	int parte1 = chave2 >> num_bits; 
-	int parte2 = chave2 & TAMD;
+int funcaoDobra(int cod2){
+	int num_bits = cod2;
+	int parte1 = cod2 >> num_bits; 
+	int parte2 = cod2 & MD;
 	return (parte1 ^ parte2);
 	
 }
-void inserirMult(int tm[], int valor)
+void inserirMult(int xx[], int valor)
 {
 	int idm = funcaoMult(valor);
-	while(tm[idm] != 0)
+	while(xx[idm] != 0)
 	{
 		idm = funcaoMult(idm + 1);
 	}
-	tm[idm] = valor;
+	xx[idm] = valor;
 }
-void inserirdobra(int td[], int valor1)
+void inserirdobra(int xy[], int valor1)
 {
 	int idd = funcaoDobra(valor1);
-	while(td[idd] != 0)
+	while(xy[idd] != 0)
 	{
 		idd= funcaoDobra(idd + 1);
 	}
-	td[idd] = valor1;
+	xy[idd] = valor1;
 }
 void inserirDiv(int t[], int valor)
 {
@@ -76,23 +76,23 @@ t[id] = valor;
 void imprimir(int t[])
 {
 	int i;
-	for(i = 0; i < TAM; i++)
+	for(i = 0; i < M; i++)
 	{
 	printf("%d = %d\n", i , t[i]);
 }
 }
-void imprimirMult(int tm[]) // tm para multiplicaçao
+void imprimirMult(int tm[]) 
 {
-	int j; // para multiplicçao
-	for(j = 0; j < TAMM; j++)
+	int j; 
+	for(j = 0; j < MM; j++)
 	{
 		printf("%d = %d\n", j , tm[j]);
 	}
 }
-void imprimirDobra(int td[]) // tm para multiplicaçao
+void imprimirDobra(int td[]) 
 {
-	int z; // para dobra
-	for(z = 0; z < TAMD; z++)
+	int z;
+	for(z = 0; z < MD; z++)
 	{
 		printf("%d = %d\n", z , td[z]);
 	}
@@ -127,7 +127,7 @@ void menu3()
 }
 int main(int argc, char** argv)
 {
-	int op, valor, tabela[TAM], tabelamult[TAMM], tabelaDobra[TAMD];
+	int op, valor, tabela[M], tabelamult[MM], tabelaDobra[MD];
 	inicializarDiv(tabela);
 	inicializarTabelamMult(tabelamult);
 	inicializarTabelaDobra(tabelaDobra);
