@@ -1,7 +1,10 @@
-Na questção 1:
+Relatório Da Implementação:
 
+Na questão 1:
+Na dobra está implentado sem haver tatamento de colisão, e como é dito no exemplo, que dobra a folha, ai a proxima folha, a primeira metade da folha a ser dobrada é realizado um deslocamento de bits, e na outra metade reliza uma operação entre cada bits, sendo assim, é retornado cada bits em sua posisão. Na mutiplicação temos uma varialvel responsavel, multiplicamos ela pelo valor. Na divisão retornamos uma chave pelo tamanho e localizar o valor.
 
-Na questção 2:
+Na questão 2:
+Criamos o tamanho, com ajuda de variaveis e função, inicializamos para organizar a lista, e uma maneira para culcular, tendo função para inserir, burcar, imprimir, e utilizando as mesmas, nos ajudou a implementar o codigo e o problema exigido, utilizando e havendo tratamento de colisão.
 
-
-Na questção 3:
+Na questão 3:
+Implementação de exemplos na questão 1, multiplicando, dividindo e iniciar, inserindo e buscando, utilizando funções para melhor exemplificação;
