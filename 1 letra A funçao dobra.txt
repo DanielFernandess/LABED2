@@ -1,4 +1,3 @@
-//1 letra A funçao dobra
 #include <stdio.h>
 #include <stdlib.h>
 #define TAM 7
@@ -80,7 +79,7 @@ int main(int argc, char** argv)
 	return 0;
 }
  
-// 1 letra B função multiplicação 
+// 1 letra B funÃ§Ã£o multiplicaÃ§Ã£o 
 #include <stdio.h>
 #include <stdlib.h>
 #define TAM 7
@@ -161,7 +160,7 @@ int main(int argc, char** argv)
 }
 
 
-// questao 1 letra C função divisão
+// questao 1 letra C funÃ§Ã£o divisÃ£o
 #include <stdio.h>
 #include <stdlib.h>
 #define TAM 7
