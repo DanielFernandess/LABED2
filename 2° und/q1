@@ -1,240 +1,111 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define TAM 7
 
-void inicializarTabela(int t[])
-{
-	int i;
-	for(i = 0; i < TAM; i++)
-	{
-		t[i] = 0;
-	}
+#define M 25
+
+
+typedef struct{
+    int funcionario;
+    char nome[50];
+}Pessoa;
+
+Pessoa tabelaHash[M];
+
+
+void inicializarTabela(){
+    int i;
+    for(i = 0; i < M; i++)
+        tabelaHash[i].funcionario = -1;
 }
 
-int funcaoDobra(int chave){
-	int num_bits = chave;
-	int parte1 = chave >> num_bits;
-	int parte2 = chave & TAM;
+int funcaoDobra(int cod){
+	int num_bits = cod;
+	int parte1 = cod >> num_bits;
+	int parte2 = cod & M;
 	return (parte1 ^ parte2);
 	
 }
-
-void inserir(int t[],int valor)
-{
-	int id = funcaoDobra(valor);
-	while(t[id] != 0)
-	{
-		id = funcaoDobra(id + 1);
-	}
-	t[id] = valor;
-}
-
-void imprimir(int t[])
-{
-	int i;
-	for(i = 0; i < TAM; i++)
-	{
-		printf("%d = %d\n", i , t[i]);
-	}
-}
-
-void menu()
-{
-	printf("\n");
-	printf("1 - inseir\n");
-	printf("2 - imprimir\n");
-	printf("3 - sair\n");
-	printf("\n");
-}
-int main(int argc, char** argv)
-{
-	int op, valor, tabela[TAM];
-	inicializarTabela(tabela);
-	do
-	{
-		menu();
-		scanf("%d", &op);
-		switch(op)
-		{
-		case 1:
-			printf("Qual valor voce deseja inserir: ");
-			scanf("%d", &valor);
-			inserir(tabela, valor);
-			break;
-		case 2:
-			imprimir(tabela);
-		
-			break;
-		case 3: 
-			printf("saindo......\n");
-			break;
-		default:
-			printf("opcao invalida!\n");
-			break;
-		}
-		
-	} while(op != 3); 
-	
-	
-	return 0;
-}
- 
-// 1 letra B função multiplicação 
-#include <stdio.h>
-#include <stdlib.h>
-#define TAM 7
-
-void inicializarTabela(int t[])
-{
-	int i;
-	for(i = 0; i < TAM; i++)
-	{
-		t[i] = 0;
-	}
-}
-
-int funacaomult(int chave){ 
-	float a = 0.6180339887;
-	float value = chave * a;
-	value = value - (int) value;
-	return (int) (TAM * value);
-}
-void inserir(int t[],int valor)
-{
-	int id = funacaomult(valor);
-	while(t[id] != 0)
-	{
-		id = funacaomult(id + 1);
-	}
-	t[id] = valor;
-}
-
-void imprimir(int t[])
-{
-	int i;
-	for(i = 0; i < TAM; i++)
-	{
-		printf("%d = %d\n", i , t[i]);
-	}
-}
-
-void menu()
-{
-	printf("\n");
-	printf("1 - inseir\n");
-	printf("2 - imprimir\n");
-	printf("3 - sair\n");
-	printf("\n");
-}
-int main(int argc, char** argv)
-{
-	int op, valor, tabela[TAM];
-	inicializarTabela(tabela);
-	do
-	{
-		menu();
-		scanf("%d", &op);
-		switch(op)
-		{
-		case 1:
-			printf("Qual valor voce deseja inserir: ");
-			scanf("%d", &valor);
-			inserir(tabela, valor);
-			break;
-		case 2:
-			imprimir(tabela);
-		
-			break;
-		case 3: 
-			printf("saindo......\n");
-			break;
-		default:
-			printf("opcao invalida!\n");
-			break;
-		}
-		
-	} while(op != 3); 
-	
-	
-	return 0;
+int gerarCodigoHash(int chave){
+    return chave % M;
 }
 
 
-// questao 1 letra C função divisão
-#include <stdio.h>
-#include <stdlib.h>
-#define TAM 7
-
-void inicializarTabela(int t[])
-{
-	int i;
-	for(i = 0; i < TAM; i++)
-	{
-		t[i] = 0;
-	}
+Pessoa lerPessoa(){
+    Pessoa p;
+    printf("Digite o funcionario: ");
+    scanf("%d", &p.funcionario);
+    scanf("%*c");
+    printf("Digite o nome: ");
+    fgets(p.nome, 50, stdin);
+    return p;
 }
 
-int funcaoDiv(int chave)
-{
-	return chave % TAM; 
+void inserir(){
+    Pessoa pes = lerPessoa();
+    int indice = gerarCodigoHash(pes.funcionario);
+    while(tabelaHash[indice].funcionario != -1)
+        indice = gerarCodigoHash(indice + 1);
+    tabelaHash[indice] = pes;
 }
 
-void inserir(int t[],int valor)
-{
-	int id = funcaoDiv(valor);
-	while(t[id] != 0)
-	{
-		id = funcaoDiv(id + 1);
-	}
-	t[id] = valor;
+Pessoa* buscar(int chave){
+    int indice = gerarCodigoHash(chave);
+    while(tabelaHash[indice].funcionario != -1){
+        if(tabelaHash[indice].funcionario == chave)
+            return &tabelaHash[indice];
+        else
+            indice = gerarCodigoHash(indice + 1);
+    }
+    return NULL;
 }
 
-void imprimir(int t[])
-{
-	int i;
-	for(i = 0; i < TAM; i++)
-	{
-		printf("%d = %d\n", i , t[i]);
-	}
+void imprimir(){
+    int i;
+    printf("\n------------------------TABELA---------------------------\n");
+    for(i = 0; i < M; i++){
+        if(tabelaHash[i].funcionario != -1)
+            printf("%2d = %3d \t %s", i, tabelaHash[i].funcionario, tabelaHash[i].nome);
+        else
+            printf("%2d =\n", i);
+    }
+    printf("\n----------------------------------------------------------\n");
 }
 
-void menu()
-{
-	printf("\n");
-	printf("1 - inseir\n");
-	printf("2 - imprimir\n");
-	printf("3 - sair\n");
-	printf("\n");
-}
-int main(int argc, char** argv)
-{
-	int op, valor, tabela[TAM];
-	inicializarTabela(tabela);
-	do
-	{
-		menu();
-		scanf("%d", &op);
-		switch(op)
-		{
-		case 1:
-			printf("Qual valor voce deseja inserir: ");
-			scanf("%d", &valor);
-			inserir(tabela, valor);
-			break;
-		case 2:
-			imprimir(tabela);
-		
-			break;
-		case 3: 
-			printf("saindo......\n");
-			break;
-		default:
-			printf("opcao invalida!\n");
-			break;
-		}
-		
-	} while(op != 3); 
-	
-	
-	return 0;
+int main() {
+    int op, chave;
+    Pessoa *p;
+
+    inicializarTabela();
+
+    do{
+        printf("1 - Inserir\n2 - Buscar\n3 - Imprimir\n0 - Sair\n");
+        scanf("%d", &op);
+
+        switch(op){
+        case 0:
+            printf("Saindo...\n");
+            break;
+        case 1:
+            inserir();
+            break;
+        case 2:
+            printf("Digite o funcionario a ser buscada: ");
+            scanf("%d", &chave);
+            p = buscar(chave);
+
+            if(p)
+                printf("\n\tFuncionario: %d \tNome: %s\n", p->funcionario, p->nome);
+            else
+                printf("\nFunionario nao encontrada!\n");
+            break;
+        case 3:
+            imprimir();
+            break;
+        default:
+            printf("Opcao invalida!\n");
+        }
+
+    }while(op != 0);
+
+    return 0;
 }
